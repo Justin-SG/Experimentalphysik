@@ -2,7 +2,7 @@ import cv2
 import imutils
 
 # Path to video
-cap = cv2.VideoCapture('C:/Users/schoe/Desktop/ExPhyTest/20210627_130502.mp4')
+cap = cv2.VideoCapture('C:/Users/schoe/Desktop/ExPhyTest/in.mp4')
 
 # Check if camera opened successfully
 if (cap.isOpened() == False): 
@@ -13,11 +13,6 @@ f = open("C:/Users/schoe/Desktop/ExPhyTest/out.txt", "w")
   
 start_frame_number = 12500
 cap.set(cv2.CAP_PROP_POS_FRAMES, start_frame_number)
-frame_width = int(cap.get(3))
-frame_height = int(cap.get(4))
-
-# Define the codec and create VideoWriter object.The output is stored in 'outpy.avi' file.
-out = cv2.VideoWriter('outpy.mp4',cv2.VideoWriter_fourcc('H','E','V','C'), 120, (frame_width,frame_height))
 
 # Create header line
 f.write('Frame;X-Coord;Y-Coord\n')
@@ -62,8 +57,6 @@ while True:
     font = cv2.FONT_HERSHEY_SIMPLEX
     cv2.putText(blackAndWhiteImage, str(cap.get(cv2.CAP_PROP_POS_FRAMES)),(0,50), font, 1.5,(255,255,255),2,cv2.LINE_AA)
 
-    # Write frame to file
-    out.write(blackAndWhiteImage)
     # Display the resulting frame    
     cv2.imshow('Video', blackAndWhiteImage)
     
@@ -80,7 +73,6 @@ while True:
 
 # When everything done, release the video capture and video write objects
 cap.release()
-out.release()
 f.close()
 
 # Closes all the frames
